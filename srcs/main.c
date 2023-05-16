@@ -6,140 +6,131 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 23:53:43 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/05/16 22:32:49 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/05/17 01:25:06 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fractol.h"
-#include "fractals.c"
-
-// typedef struct s_data {
-// 	void	*img;
-// 	char	*addr;
-// 	int		bits_per_pixel;
-// 	int		line_length;
-// 	int		endian;
-// }				t_data;
-
-// typedef struct {
-// 	void *mlx;
-// 	void *mlx_win;
-// } t_callback_data;
+#include "../includes/fractol.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
-int	deal_key(int key, void *param)
+int	close_window(void *param)
 {
+	t_callback_data	*data;
 	void			*mlx;
 	void			*mlx_win;
-	t_callback_data	*data;
 
 	data = (t_callback_data *)param;
-
 	mlx = data->mlx;
 	mlx_win = data->mlx_win;
-
-	ft_putnbr_fd(key, 1);
-	if (key == 65307)
-	{
-		mlx_destroy_window(mlx, mlx_win);
-		exit(0);
-	}
-	return (0);
+	mlx_destroy_window(mlx, mlx_win);
+	exit(0);
 }
 
-int	deal_click(int button, int x, int y, void *param)
+void	*palette_gen(int max_iteration)
 {
-	ft_putnbr_fd(button, 1);
-	ft_putchar_fd('\n', 1);
-	ft_putnbr_fd(x, 1);
-	ft_putchar_fd('\n', 1);
-	ft_putnbr_fd(y, 1);
-	ft_putchar_fd('\n', 1);
-	return (0);
+	int		*palette;
+	int		i;
+	double	t;
+
+	palette = malloc(sizeof(int) * max_iteration);
+	i = 0;
+	while (i < max_iteration)
+	{
+		t = (double)i / max_iteration;
+		palette[i] = (int)(9 * (1 - t) * pow(t, 3) * 255) << 16
+			| (int)(15 * pow((1 - t), 2) * pow(t, 2) * 255) << 8
+			| (int)(8.5 * pow((1 - t), 3) * t * 255);
+		i++;
+	}
+	return (palette);
 }
 
-
-
-int	main(void)
+void	update_fractal_image(void *mlx, void *win, double view_x, double view_y)
 {
-	t_data			img;
-	t_callback_data	data;
-	int				width;
-	int				height;
-	double			x0;
-	double			y0;
-	int				iteration;
-	int				px;
-	int				py;
-	int				color;
-	int				max_iteration;
-	void			*mlx_ptr;
-	void			*win_ptr;
+	t_data	img;
+	double	x0, y0;
+	int		iteration;
+	int		px, py;
+	int		color;
+	int		*palette;
+	double	min_x = -2.0 + view_x;
+	double	max_x = 0.47 + view_x;
+	double	min_y = -1.12 + view_y;
+	double	max_y = 1.12 + view_y;
 
-	width = 1000;
-	height = 1000;
-
-	// Define the Mandelbrot Set scale
-	double min_x = -2.0;
-	double max_x = 0.47;
-	double min_y = -1.12;
-	double max_y = 1.12;
-
-	max_iteration = 100;
-	int palette[max_iteration];
-
-	for (int i = 0; i < max_iteration; i++)
-	{
-		// Calculate the color based on the iteration count
-		double t = (double)i / max_iteration;  // Normalize the iteration count
-		int red = (int)(9 * (1 - t) * t * t * t * 255);
-		int green = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
-		int blue = (int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255);
-
-		// Combine the color channels into a single integer value
-		int color = (red << 16) | (green << 8) | blue;
-
-		// Store the color in the palette array
-		palette[i] = color;
-	}
-
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, width, height, "Window");
-
-	data.mlx = mlx_ptr;
-	data.mlx_win = win_ptr;
-
-	img.img = mlx_new_image(data.mlx, width, height);
+	palette = palette_gen(MAX_ITERATION);
+	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-
 	py = 0;
-	while (py < height)
+	while (py < HEIGHT)
 	{
 		px = 0;
-		while (px < width)
+		while (px < WIDTH)
 		{
-			x0 = (double)px / width * (max_x - min_x) + min_x;
-			y0 = (double)py / height * (max_y - min_y) + min_y;
-
-			// iteration = plot_mandelbrot(x0, y0, max_iteration);
-			iteration = plot_julia(x0, y0, max_iteration);
-			//iteration = plot_burningShip(x0, y0, max_iteration);
+			x0 = (double)px / WIDTH * (max_x - min_x) + min_x;
+			y0 = (double)py / HEIGHT * (max_y - min_y) + min_y;
+			// iteration = plot_mandelbrot(x0, y0, MAX_ITERATION);
+			// iteration = plot_julia(x0, y0, MAX_ITERATION);
+			iteration = plot_burningship(x0, y0, MAX_ITERATION);
 			color = palette[iteration];
 			my_mlx_pixel_put(&img, px, py, color);
 			px++;
 		}
 		py++;
 	}
+	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
+	mlx_destroy_image(mlx, img.img);
+}
 
-	mlx_put_image_to_window(data.mlx, data.mlx_win, img.img, 0, 0);
-	mlx_key_hook(data.mlx_win, deal_key, (void *)&data);
-	mlx_mouse_hook(data.mlx_win, deal_click, (void *)&data);
+int	move_view(int key, void *param)
+{
+	t_callback_data	*data;
+
+	data = (t_callback_data *)param;
+	printf("key: %d\n", key);
+	if (key == 65307)
+	{
+		mlx_destroy_window(data->mlx, data->mlx_win);
+		exit(0);
+	}
+	else
+	{
+		if (key == 65361)
+			data->view_x -= 0.1;
+		else if (key == 65363)
+			data->view_x += 0.1;
+		else if (key ==	65364)
+			data->view_y += 0.1;
+		else if (key ==	65362)
+			data->view_y -= 0.1;
+		update_fractal_image(data->mlx, data->mlx_win, data->view_x, data->view_y);
+	}
+}
+
+int	main(void)
+{
+	t_data			img;
+	t_callback_data	data;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	int				*palette;
+
+	mlx_ptr = mlx_init();
+	win_ptr = mlx_new_window(mlx_ptr, WIDTH, HEIGHT, "Window");
+	data.mlx = mlx_ptr;
+	data.mlx_win = win_ptr;
+	data.view_x = 0;
+	data.view_y = 0;
+	update_fractal_image(mlx_ptr, win_ptr, data.view_x, data.view_y);
+	mlx_key_hook(data.mlx_win, move_view, (void *)&data);
+	// mlx_key_hook(data.mlx_win, deal_key, (void *)&data);
+	mlx_hook(data.mlx_win, 17, 0L, close_window, (void *)&data);
 	mlx_loop(data.mlx);
 }

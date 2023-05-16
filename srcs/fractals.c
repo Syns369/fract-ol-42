@@ -6,11 +6,11 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:12:05 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/05/16 22:13:03 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/05/16 22:37:57 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fractol.h"
+#include "../includes/fractol.h"
 
 int	plot_mandelbrot(double x0, double y0, int max_iteration)
 {
