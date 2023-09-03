@@ -6,13 +6,13 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 23:53:43 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/05/17 01:25:06 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/03 22:26:34 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_fractol_data *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -20,16 +20,10 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	close_window(void *param)
+int	close_window(t_mlx_data *data)
 {
-	t_callback_data	*data;
-	void			*mlx;
-	void			*mlx_win;
-
-	data = (t_callback_data *)param;
-	mlx = data->mlx;
-	mlx_win = data->mlx_win;
-	mlx_destroy_window(mlx, mlx_win);
+	mlx_destroy_window(data->mlx, data->win);
+	free(data->mlx);
 	exit(0);
 }
 
@@ -52,23 +46,26 @@ void	*palette_gen(int max_iteration)
 	return (palette);
 }
 
-void	update_fractal_image(void *mlx, void *win, double view_x, double view_y)
+void	update_fractal_image(t_mlx_data *data)
 {
-	t_data	img;
-	double	x0, y0;
-	int		iteration;
-	int		px, py;
-	int		color;
-	int		*palette;
-	double	min_x = -2.0 + view_x;
-	double	max_x = 0.47 + view_x;
-	double	min_y = -1.12 + view_y;
-	double	max_y = 1.12 + view_y;
+	t_fractol_data	img;
+	double			x0;
+	double			y0;
+	int				iteration;
+	int				px;
+	int				py;
+	int				*palette;
 
-	palette = palette_gen(MAX_ITERATION);
-	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	double	min_x = -2.0 + data->view_x;
+	double	max_x = 0.47 + data->view_x;
+	double	min_y = -1.12 + data->view_y;
+	double	max_y = 1.12 + data->view_y;
+
+	img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	py = 0;
+	palette = data->palette;
+
 	while (py < HEIGHT)
 	{
 		px = 0;
@@ -76,29 +73,25 @@ void	update_fractal_image(void *mlx, void *win, double view_x, double view_y)
 		{
 			x0 = (double)px / WIDTH * (max_x - min_x) + min_x;
 			y0 = (double)py / HEIGHT * (max_y - min_y) + min_y;
-			// iteration = plot_mandelbrot(x0, y0, MAX_ITERATION);
+			iteration = plot_mandelbrot(x0, y0, MAX_ITERATION);
 			// iteration = plot_julia(x0, y0, MAX_ITERATION);
-			iteration = plot_burningship(x0, y0, MAX_ITERATION);
-			color = palette[iteration];
-			my_mlx_pixel_put(&img, px, py, color);
+			// iteration = plot_burningship(x0, y0, MAX_ITERATION);
+			// color = ;
+			my_mlx_pixel_put(&img, px, py, palette[iteration]);
 			px++;
 		}
 		py++;
 	}
-	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
-	mlx_destroy_image(mlx, img.img);
+	mlx_put_image_to_window(data->mlx, data->win, img.img, 0, 0);
+	mlx_destroy_image(data->mlx, img.img);
 }
 
-int	move_view(int key, void *param)
+int	handle_key(int key, t_mlx_data *data)
 {
-	t_callback_data	*data;
-
-	data = (t_callback_data *)param;
 	printf("key: %d\n", key);
 	if (key == 65307)
 	{
-		mlx_destroy_window(data->mlx, data->mlx_win);
-		exit(0);
+		close_window(data);
 	}
 	else
 	{
@@ -110,27 +103,45 @@ int	move_view(int key, void *param)
 			data->view_y += 0.1;
 		else if (key ==	65362)
 			data->view_y -= 0.1;
-		update_fractal_image(data->mlx, data->mlx_win, data->view_x, data->view_y);
+		update_fractal_image(data);
 	}
+	return (0);
+}
+
+int	handle_mouse(int button, int x, int y, t_mlx_data *data)
+{
+	printf("button: %d\n", button);
+	printf("x: %d\n", x);
+	printf("y: %d\n", y);
+	if (button == 4)
+	{
+		
+	}
+	else if (button == 5)
+	{
+		
+	}
+	return (0);
 }
 
 int	main(void)
 {
-	t_data			img;
-	t_callback_data	data;
-	void			*mlx_ptr;
-	void			*win_ptr;
-	int				*palette;
+	t_mlx_data	*data;
 
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, WIDTH, HEIGHT, "Window");
-	data.mlx = mlx_ptr;
-	data.mlx_win = win_ptr;
-	data.view_x = 0;
-	data.view_y = 0;
-	update_fractal_image(mlx_ptr, win_ptr, data.view_x, data.view_y);
-	mlx_key_hook(data.mlx_win, move_view, (void *)&data);
-	// mlx_key_hook(data.mlx_win, deal_key, (void *)&data);
-	mlx_hook(data.mlx_win, 17, 0L, close_window, (void *)&data);
-	mlx_loop(data.mlx);
+	data = malloc(sizeof(t_mlx_data));
+
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Window");
+
+	data->view_x = 0;
+	data->view_y = 0;
+	data->palette = palette_gen(MAX_ITERATION);
+
+	update_fractal_image(data);
+
+	mlx_key_hook(data->win, handle_key, data);
+	mlx_mouse_hook(data->win, handle_mouse, data);
+	mlx_hook(data->win, 17, 0L, close_window, data);
+
+	mlx_loop(data->mlx);
 }

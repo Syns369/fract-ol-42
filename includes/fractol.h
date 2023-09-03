@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:13:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/05/17 01:20:10 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/03 22:04:12 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,31 @@
 # define MAX_ITERATION 100
 # define ZOOM 1.1
 
-typedef struct s_data {
+typedef struct s_fractol_data {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_data;
+}				t_fractol_data;
 
-typedef struct s_callback_data {
+typedef struct s_mlx_data {
 	void	*mlx;
-	void	*mlx_win;
+	void	*win;
 	double	view_x;
 	double	view_y;
-}	t_callback_data;
+	void	*palette;
+	double	zoom;
+	double	zoom_center_x;
+	double	zoom_center_y;
+}	t_mlx_data;
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	my_mlx_pixel_put(t_fractol_data *data, int x, int y, int color);
 int		plot_mandelbrot(double x0, double y0, int max_iteration);
 int		plot_julia(double x0, double y0, int max_iteration);
 int		plot_burningship(double x0, double y0, int max_iteration);
-int		close_window(void *param);
-void	update_fractal_image(void *mlx, void *win, double view_x, double view_y);
+int		close_window(t_mlx_data *data);
+void	update_fractal_image(t_mlx_data *data);
 int		move_view(int key, void *param);
 void	*palette_gen(int max_iteration);
 #endif
