@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 23:53:43 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/03 22:26:34 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:37:39 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ void	update_fractal_image(t_mlx_data *data)
 	double	min_y = -1.12 + data->view_y;
 	double	max_y = 1.12 + data->view_y;
 
+	min_x *= data->zoom;
+	max_x *= data->zoom;
+	min_y *= data->zoom;
+	max_y *= data->zoom;
+
 	img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	py = 0;
@@ -99,10 +104,16 @@ int	handle_key(int key, t_mlx_data *data)
 			data->view_x -= 0.1;
 		else if (key == 65363)
 			data->view_x += 0.1;
-		else if (key ==	65364)
+		else if (key == 65364)
 			data->view_y += 0.1;
-		else if (key ==	65362)
+		else if (key == 65362)
 			data->view_y -= 0.1;
+		else if (key == 102)
+		{
+			data->view_x = 0;
+			data->view_y = 0;
+			data->zoom = 1;
+		}
 		update_fractal_image(data);
 	}
 	return (0);
@@ -115,12 +126,13 @@ int	handle_mouse(int button, int x, int y, t_mlx_data *data)
 	printf("y: %d\n", y);
 	if (button == 4)
 	{
-		
+		data->zoom *= 0.9;
 	}
 	else if (button == 5)
 	{
-		
+		data->zoom *= 1.1;
 	}
+	update_fractal_image(data);
 	return (0);
 }
 
@@ -135,6 +147,15 @@ int	main(void)
 
 	data->view_x = 0;
 	data->view_y = 0;
+
+	data->zoom = 1;
+
+
+	// data->min_x = -2.0;
+	// data->max_x = 0.47;
+	// data->min_y = -1.12;
+	// data->max_y = 1.12;
+
 	data->palette = palette_gen(MAX_ITERATION);
 
 	update_fractal_image(data);

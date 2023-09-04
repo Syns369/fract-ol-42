@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:13:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/03 22:04:12 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:37:13 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ typedef struct s_mlx_data {
 	void	*win;
 	double	view_x;
 	double	view_y;
+
+	// double	min_x;
+	// double	max_x;
+	// double	min_y;
+	// double	max_y;
+
 	void	*palette;
 	double	zoom;
 	double	zoom_center_x;
