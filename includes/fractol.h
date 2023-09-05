@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:13:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/05 12:26:33 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:32:02 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define WIDTH 512
 # define HEIGHT 512
 # define MAX_ITERATION 100
-# define ZOOM_FACTOR 1.1
+# define ZOOM_FACTOR 0.1
 
 typedef struct s_fractol_data {
 	void	*img;
@@ -34,8 +34,6 @@ typedef struct s_fractol_data {
 typedef struct s_mlx_data {
 	void	*mlx;
 	void	*win;
-	double	view_x;
-	double	view_y;
 
 	double	min_x;
 	double	max_x;
@@ -43,7 +41,6 @@ typedef struct s_mlx_data {
 	double	max_y;
 
 	void	*palette;
-	double	zoom;
 }	t_mlx_data;
 
 void	my_mlx_pixel_put(t_fractol_data *data, int x, int y, int color);
@@ -54,4 +51,12 @@ int		close_window(t_mlx_data *data);
 void	update_fractal_image(t_mlx_data *data);
 int		move_view(int key, void *param);
 void	*palette_gen(int max_iteration);
+int		init_fractol_data(t_mlx_data *data);
+int		main(void);
+
+void	move_x(t_mlx_data *data, float amount);
+void	move_y(t_mlx_data *data, float amount);
+void	zoom(t_mlx_data *data, double x, double y, double zoom_factor);
+int		handle_key(int key, t_mlx_data *data);
+int		handle_mouse(int button, int x, int y, t_mlx_data *data);
 #endif

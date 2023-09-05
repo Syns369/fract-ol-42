@@ -30,6 +30,7 @@ RANLIB = ranlib
 
 SRC_FILES = main\
 			fractals\
+			navigation\
 
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
