@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:13:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/04 15:37:13 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/05 12:26:33 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include <stdio.h>
 # include <math.h>
 
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 512
+# define HEIGHT 512
 # define MAX_ITERATION 100
-# define ZOOM 1.1
+# define ZOOM_FACTOR 1.1
 
 typedef struct s_fractol_data {
 	void	*img;
@@ -37,15 +37,13 @@ typedef struct s_mlx_data {
 	double	view_x;
 	double	view_y;
 
-	// double	min_x;
-	// double	max_x;
-	// double	min_y;
-	// double	max_y;
+	double	min_x;
+	double	max_x;
+	double	min_y;
+	double	max_y;
 
 	void	*palette;
 	double	zoom;
-	double	zoom_center_x;
-	double	zoom_center_y;
 }	t_mlx_data;
 
 void	my_mlx_pixel_put(t_fractol_data *data, int x, int y, int color);
