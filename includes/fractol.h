@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:13:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/06 02:45:29 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/06 03:54:29 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,14 @@ typedef struct s_mlx_data {
 	void	*palette;
 
 	char	*fractal_name;
+	double	julia_cx;
+	double	julia_cy;
 }	t_mlx_data;
 
 void	my_mlx_pixel_put(t_fractol_data *data, int x, int y, int color);
-int		plot_mandelbrot(double x0, double y0, int max_iteration);
-int		plot_julia(double x0, double y0, int max_iteration);
-int		plot_burningship(double x0, double y0, int max_iteration);
+int		plot_mandelbrot(double x0, double y0);
+int		plot_julia(double x0, double y0, double cx, double cy);
+int		plot_burningship(double x0, double y0);
 int		close_window(t_mlx_data *data);
 void	update_fractal_image(t_mlx_data *data);
 int		move_view(int key, void *param);
@@ -61,6 +63,11 @@ void	move_y(t_mlx_data *data, float amount);
 void	zoom(t_mlx_data *data, double x, double y, double zoom_factor);
 int		handle_key(int key, t_mlx_data *data);
 int		handle_mouse(int button, int x, int y, t_mlx_data *data);
+void	center(t_mlx_data *data);
+
+void	animate_julia(t_mlx_data *data, float amount, int direction);
+void	step(t_mlx_data *data, int direction);
+void	animate(t_mlx_data *data, int key);
 
 void	color_pixel(t_mlx_data *data, t_fractol_data img, int px, int py);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:24:50 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/05 18:43:35 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/06 03:40:38 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,39 +47,10 @@ void	zoom(t_mlx_data *data, double x, double y, double zoom_factor)
 	data->max_y -= (1 - rel_pos_y) * range_y * zoom_factor;
 }
 
-int	handle_key(int key, t_mlx_data *data)
+void	center(t_mlx_data *data)
 {
-	printf("key: %d\n", key);
-	if (key == 65307)
-		close_window(data);
-	else
-	{
-		if (key == 65361)
-			move_x(data, -0.1);
-		else if (key == 65363)
-			move_x(data, 0.1);
-		else if (key == 65364)
-			move_y(data, 0.1);
-		else if (key == 65362)
-			move_y(data, -0.1);
-		else if (key == 102)
-		{
-			data->min_x = -2.0;
-			data->max_x = 0.47;
-			data->min_y = -1.12;
-			data->max_y = 1.12;
-		}
-		update_fractal_image(data);
-	}
-	return (0);
-}
-
-int	handle_mouse(int button, int x, int y, t_mlx_data *data)
-{
-	if (button == 4)
-		zoom(data, x, y, ZOOM_FACTOR);
-	else if (button == 5)
-		zoom(data, x, y, -ZOOM_FACTOR);
-	update_fractal_image(data);
-	return (0);
+	data->min_x = -2.0;
+	data->max_x = 0.47;
+	data->min_y = -1.12;
+	data->max_y = 1.12;
 }
