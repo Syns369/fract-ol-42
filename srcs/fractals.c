@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:12:05 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/05/16 22:37:57 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:43:51 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	plot_mandelbrot(double x0, double y0, int max_iteration)
 	x = 0.0;
 	y = 0.0;
 	iteration = 0;
-
 	while (x * x + y * y <= 2 * 2 && iteration < max_iteration)
 	{
 		xtemp = x * x - y * y + x0;
