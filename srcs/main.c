@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 23:53:43 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 13:05:42 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 13:26:06 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,7 @@ int	init_fractol_data(t_mlx_data *data)
 {
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Window");
-	if (data->fractal_type == 2)
-	{
-		data->min_x = -2.0;
-		data->max_x = 2.0;
-		data->min_y = -2.0;
-		data->max_y = 2.0;
-	}
-	else
-	{
-		data->min_x = -2.0;
-		data->max_x = 0.47;
-		data->min_y = -1.12;
-		data->max_y = 1.12;
-	}
+	center(data);
 	data->palette = palette_gen(MAX_ITERATION);
 	update_fractal_image(data);
 	return (0);
@@ -53,13 +40,13 @@ int	handle_key(int key, t_mlx_data *data)
 	else
 	{
 		if (key == 65361)
-			move_x(data, -0.1);
+			move_x(data, -MOVE_FACTOR);
 		else if (key == 65363)
-			move_x(data, 0.1);
+			move_x(data, MOVE_FACTOR);
 		else if (key == 65364)
-			move_y(data, 0.1);
+			move_y(data, MOVE_FACTOR);
 		else if (key == 65362)
-			move_y(data, -0.1);
+			move_y(data, -MOVE_FACTOR);
 		else if (key == 102)
 			center(data);
 		else

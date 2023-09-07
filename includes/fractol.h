@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:13:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 13:07:16 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 13:26:46 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define HEIGHT 512
 # define MAX_ITERATION 100
 # define ZOOM_FACTOR 0.1
+# define MOVE_FACTOR 0.1
 
 typedef struct s_fractol_data {
 	void	*img;
