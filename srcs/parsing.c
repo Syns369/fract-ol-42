@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:18:53 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 12:27:57 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:52:57 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	julia_parse(int argc, char **argv, t_mlx_data *data)
 		error_message(argv);
 	else
 	{
-		data->julia_cx = -0.8;
-		data->julia_cy = 0.156;
+		data->julia_cx = -0.765000;
+		data->julia_cy = 0.191000;
 	}
 }
 
@@ -54,15 +54,15 @@ void	parse(int argc, char **argv, t_mlx_data *data)
 {
 	if (argc < 2)
 		error_message(argv);
-	if (strcmp(argv[1], "m") == 0)
-		data->fractal_name = "mandelbrot";
-	else if (strcmp(argv[1], "b") == 0)
-		data->fractal_name = "burningship";
-	else if (strcmp(argv[1], "t") == 0)
-		data->fractal_name = "tricorn";
-	else if (strcmp(argv[1], "j") == 0)
+	if (ft_strcmp(argv[1], "m") == 0)
+		data->fractal_type = 1;
+	else if (ft_strcmp(argv[1], "b") == 0)
+		data->fractal_type = 3;
+	else if (ft_strcmp(argv[1], "t") == 0)
+		data->fractal_type = 4;
+	else if (ft_strcmp(argv[1], "j") == 0)
 	{
-		data->fractal_name = "julia";
+		data->fractal_type = 2;
 		julia_parse(argc, argv, data);
 	}
 	else

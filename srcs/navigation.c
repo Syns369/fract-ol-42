@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:24:50 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/06 03:40:38 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:54:27 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,18 @@ void	zoom(t_mlx_data *data, double x, double y, double zoom_factor)
 
 void	center(t_mlx_data *data)
 {
-	data->min_x = -2.0;
-	data->max_x = 0.47;
-	data->min_y = -1.12;
-	data->max_y = 1.12;
+	if (data->fractal_type == 2)
+	{
+		data->min_x = -2.0;
+		data->max_x = 2.0;
+		data->min_y = -2.0;
+		data->max_y = 2.0;
+	}
+	else
+	{
+		data->min_x = -2.0;
+		data->max_x = 0.47;
+		data->min_y = -1.12;
+		data->max_y = 1.12;
+	}
 }

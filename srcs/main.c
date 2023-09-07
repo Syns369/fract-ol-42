@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 23:53:43 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 11:19:16 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:51:40 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	init_fractol_data(t_mlx_data *data)
 {
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Window");
-	if (strcmp(data->fractal_name, "julia") == 0)
+	if (data->fractal_type == 2)
 	{
 		data->min_x = -2.0;
 		data->max_x = 2.0;

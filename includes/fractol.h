@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:13:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 11:05:16 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:48:00 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_mlx_data {
 
 	int		*palette;
 
-	char	*fractal_name;
+	int		fractal_type;
 	double	julia_cx;
 	double	julia_cy;
 

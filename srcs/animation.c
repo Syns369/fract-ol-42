@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 03:30:20 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/06 03:54:02 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:49:42 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,15 @@ void	step(t_mlx_data *data, int direction)
 
 void	animate(t_mlx_data *data, int key)
 {
-	if (key == 116 && strcmp(data->fractal_name, "julia") == 0)
-		animate_julia(data, 0.1, 1);
-	else if (key == 114 && strcmp(data->fractal_name, "julia") == 0)
-		animate_julia(data, 0.1, -1);
-	else if (key == 117 && strcmp(data->fractal_name, "julia") == 0)
-		step(data, 1);
-	else if (key == 121 && strcmp(data->fractal_name, "julia") == 0)
-		step(data, -1);
+	if (data->fractal_type == 2)
+	{
+		if (key == 116)
+			animate_julia(data, 0.1, 1);
+		else if (key == 114)
+			animate_julia(data, 0.1, -1);
+		else if (key == 117)
+			step(data, 1);
+		else if (key == 121)
+			step(data, -1);
+	}
 }
