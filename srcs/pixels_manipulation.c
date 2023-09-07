@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:01:33 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 19:19:28 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 22:40:24 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	update_fractal_image(t_mlx_data *data)
 	free(img);
 	if (data->fractal_type == 2)
 	{
-		printf("julia_cx: %f\n", data->julia_cx);
-		printf("julia_cy: %f\n", data->julia_cy);
+		ft_printf("julia_cx: %f\n", data->julia_cx);
+		ft_printf("julia_cy: %f\n", data->julia_cy);
 	}
 }

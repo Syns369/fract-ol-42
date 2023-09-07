@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 03:30:20 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 18:55:26 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 22:13:45 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	animate_juliacx(t_mlx_data *data, int direction)
 {
 	float	lifespan;
 
-	lifespan = 0.5;
+	lifespan = 0.1;
 	while (lifespan > 0)
 	{
 		data->julia_cx += ANIMATE_FACTOR * direction;
@@ -29,7 +29,7 @@ void	animate_juliacy(t_mlx_data *data, int direction)
 {
 	float	lifespan;
 
-	lifespan = 0.5;
+	lifespan = 0.1;
 	while (lifespan > 0)
 	{
 		data->julia_cy += ANIMATE_FACTOR * direction;

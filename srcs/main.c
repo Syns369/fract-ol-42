@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 23:53:43 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 18:38:21 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 01:32:07 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	init_fractol_data(t_mlx_data *data)
 
 int	handle_key(int key, t_mlx_data *data)
 {
-	printf("key: %d\n", key);
+	ft_printf("key: %d\n", key);
 	if (key == 65307)
 		close_window(data);
 	else

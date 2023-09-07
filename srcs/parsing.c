@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:18:53 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 19:06:23 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 22:40:20 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	error_message(char **argv, t_mlx_data *data)
 {
-	printf("Usage: %s <fractal_type> [additional_parameters]\n", argv[0]);
-	printf("Available fractal types:\n");
-	printf("  m - mandelbrot\n");
-	printf("  j - julia\n");
-	printf("  b - burningship\n");
-	printf("  t - tricorn\n");
-	printf("Additional parameters for julia:\n");
-	printf("must be float values\n");
-	printf("  - julia_cx\n");
-	printf("  - julia_cy\n");
+	ft_printf("Usage: %s <fractal_type> [additional_parameters]\n", argv[0]);
+	ft_printf("Available fractal types:\n");
+	ft_printf("  m - mandelbrot\n");
+	ft_printf("  j - julia\n");
+	ft_printf("  b - burningship\n");
+	ft_printf("  t - tricorn\n");
+	ft_printf("Additional parameters for julia:\n");
+	ft_printf("must be float values\n");
+	ft_printf("  - julia_cx\n");
+	ft_printf("  - julia_cy\n");
 	free(data);
 	exit(EXIT_FAILURE);
 }
@@ -34,8 +34,8 @@ void	julia_parse(int argc, char **argv, t_mlx_data *data)
 	{
 		if (ft_isfloat(argv[2]) && ft_isfloat(argv[3]))
 		{
-			printf("julia_cx: %f\n", ft_atof(argv[2]));
-			printf("julia_cy: %f\n", ft_atof(argv[3]));
+			ft_printf("julia_cx: %f\n", ft_atof(argv[2]));
+			ft_printf("julia_cy: %f\n", ft_atof(argv[3]));
 			data->julia_cx = ft_atof(argv[2]);
 			data->julia_cy = ft_atof(argv[3]);
 		}

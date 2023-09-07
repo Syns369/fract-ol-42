@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:12:05 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 19:21:07 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 01:47:24 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	plot_mandelbrot(double x0, double y0, int type)
 	while (x * x + y * y <= 2 * 2 && iteration < MAX_ITERATION)
 	{
 		xtemp = x * x - y * y + x0;
-		if (type == 1) // mandelbrot
+		if (type == 1)
 			y = 2 * x * y + y0;
-		else if (type == 3) // burningship
+		else if (type == 3)
 			y = fabs(2 * x * y) + y0;
-		else if (type == 4) // tricorn
+		else if (type == 4)
 			y = -2 * x * y + y0;
 		x = xtemp;
 		iteration++;
