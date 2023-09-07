@@ -23,7 +23,7 @@ INC_DIR        =includes/
 INCS         = $(LIBFT_DIR)includes/libft.h includes/ft_printf.h
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -Wall
+CFLAGS = -Wall -Werror -Wextra -flto -O2
 RM = rm -rf
 AR = ar rc
 RANLIB = ranlib
@@ -35,6 +35,9 @@ SRC_FILES = main\
 			animation\
 			utility\
 			parsing\
+			fractals_bonus\
+			colors\
+			
 
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))

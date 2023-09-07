@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:18:53 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 13:08:24 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:06:23 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	julia_parse(int argc, char **argv, t_mlx_data *data)
 	else
 	{
 		data->julia_cx = -0.765000;
-		data->julia_cy = 0.191000;
+		data->julia_cy = -0.310000;
 	}
 }
 

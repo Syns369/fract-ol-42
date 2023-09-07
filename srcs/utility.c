@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:57:14 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 12:16:18 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:25:51 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,5 @@ int	ft_isfloat(const char *str)
 	while (ft_isdigit(str[i]) || str[i] == '.')
 		if (str[i++] == '.')
 			dot_count++;
-
 	return (dot_count <= 1 && i == (int)ft_strlen(str));
 }

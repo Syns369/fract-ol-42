@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:01:33 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 12:51:08 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:04:03 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,6 @@ void	my_mlx_pixel_put(t_fractol_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	*palette_gen(int max_iteration)
-{
-	int		*palette;
-	int		i;
-	double	t;
-
-	palette = malloc(sizeof(int) * max_iteration);
-	i = 0;
-	while (i < max_iteration)
-	{
-		t = (double)i / max_iteration;
-		palette[i] = (int)(9 * (1 - t) * pow(t, 3) * 255) << 16
-			| (int)(15 * pow((1 - t), 2) * pow(t, 2) * 255) << 8
-			| (int)(8.5 * pow((1 - t), 3) * t * 255);
-		i++;
-	}
-	return (palette);
-}
-
 void	color_pixel(t_mlx_data *data, t_fractol_data *img, int px, int py)
 {
 	double	x0;
@@ -46,10 +27,10 @@ void	color_pixel(t_mlx_data *data, t_fractol_data *img, int px, int py)
 	int		iteration;
 	int		*palette;
 
+	iteration = 0;
 	x0 = (double)px / WIDTH * (data->max_x - data->min_x) + data->min_x;
 	y0 = (double)py / HEIGHT * (data->max_y - data->min_y) + data->min_y;
-
-	palette = data->palette;
+	palette = data->current_palette;
 	if (data->fractal_type == 1)
 		iteration = plot_mandelbrot(x0, y0);
 	else if (data->fractal_type == 2)
@@ -58,12 +39,10 @@ void	color_pixel(t_mlx_data *data, t_fractol_data *img, int px, int py)
 		iteration = plot_burningship(x0, y0);
 	else if (data->fractal_type == 4)
 		iteration = plot_tricorn(x0, y0);
-
-	if (iteration < 0)
-		iteration = 0;
-	else if (iteration >= MAX_ITERATION)
-		iteration = MAX_ITERATION - 1;
-	my_mlx_pixel_put(img, px, py, palette[iteration]);
+	if (iteration >= MAX_ITERATION)
+		my_mlx_pixel_put(img, px, py, 0x000000);
+	else
+		my_mlx_pixel_put(img, px, py, palette[iteration]);
 }
 
 void	update_fractal_image(t_mlx_data *data)

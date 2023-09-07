@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 23:53:43 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 13:26:06 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 18:38:21 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	close_window(t_mlx_data *data)
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
-	free(data->palette);
+	free(data->palette1);
+	free(data->palette2);
+	free(data->palette3);
 	free(data);
 	exit(0);
 }
@@ -27,7 +29,10 @@ int	init_fractol_data(t_mlx_data *data)
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Window");
 	center(data);
-	data->palette = palette_gen(MAX_ITERATION);
+	data->palette1 = palette_gen(9, 15, 8.5);
+	data->palette2 = palette_gen(10, 8.43, 5.42);
+	data->palette3 = palette_gen(38.62, 84.15, 11.77);
+	data->current_palette = data->palette1;
 	update_fractal_image(data);
 	return (0);
 }
@@ -49,6 +54,8 @@ int	handle_key(int key, t_mlx_data *data)
 			move_y(data, -MOVE_FACTOR);
 		else if (key == 102)
 			center(data);
+		else if (key == 65437)
+			change_palette(data);
 		else
 			animate(data, key);
 		update_fractal_image(data);
@@ -71,9 +78,7 @@ int	main(int argc, char **argv)
 	t_mlx_data	*data;
 
 	data = malloc(sizeof(t_mlx_data));
-
 	parse(argc, argv, data);
-
 	init_fractol_data(data);
 	mlx_key_hook(data->win, handle_key, data);
 	mlx_mouse_hook(data->win, handle_mouse, data);
