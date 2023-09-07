@@ -23,7 +23,7 @@ INC_DIR        =includes/
 INCS         = $(LIBFT_DIR)includes/libft.h includes/ft_printf.h
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -Wall -fsanitize=address
+CFLAGS = -Wall
 RM = rm -rf
 AR = ar rc
 RANLIB = ranlib

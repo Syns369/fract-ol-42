@@ -6,13 +6,13 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:18:53 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 12:52:57 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 13:08:24 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-void	error_message(char **argv)
+void	error_message(char **argv, t_mlx_data *data)
 {
 	printf("Usage: %s <fractal_type> [additional_parameters]\n", argv[0]);
 	printf("Available fractal types:\n");
@@ -24,6 +24,7 @@ void	error_message(char **argv)
 	printf("must be float values\n");
 	printf("  - julia_cx\n");
 	printf("  - julia_cy\n");
+	free(data);
 	exit(EXIT_FAILURE);
 }
 
@@ -39,10 +40,10 @@ void	julia_parse(int argc, char **argv, t_mlx_data *data)
 			data->julia_cy = ft_atof(argv[3]);
 		}
 		else
-			error_message(argv);
+			error_message(argv, data);
 	}
 	else if (argc == 3)
-		error_message(argv);
+		error_message(argv, data);
 	else
 	{
 		data->julia_cx = -0.765000;
@@ -53,7 +54,7 @@ void	julia_parse(int argc, char **argv, t_mlx_data *data)
 void	parse(int argc, char **argv, t_mlx_data *data)
 {
 	if (argc < 2)
-		error_message(argv);
+		error_message(argv, data);
 	if (ft_strcmp(argv[1], "m") == 0)
 		data->fractal_type = 1;
 	else if (ft_strcmp(argv[1], "b") == 0)
@@ -66,5 +67,5 @@ void	parse(int argc, char **argv, t_mlx_data *data)
 		julia_parse(argc, argv, data);
 	}
 	else
-		error_message(argv);
+		error_message(argv, data);
 }

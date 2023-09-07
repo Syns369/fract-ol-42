@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:13:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 12:48:00 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 13:07:16 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		ft_isfloat(const char *str);
 
 void	julia_parse(int argc, char **argv, t_mlx_data *data);
 void	parse(int argc, char **argv, t_mlx_data *data);
-void	error_message(char **argv);
+void	error_message(char **argv, t_mlx_data *data);
 
 
 #endif
