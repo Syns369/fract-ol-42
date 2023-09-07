@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:13:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 19:02:07 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:19:36 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	julia_parse(int argc, char **argv, t_mlx_data *data);
 void	parse(int argc, char **argv, t_mlx_data *data);
 void	error_message(char **argv, t_mlx_data *data);
 
-int		plot_mandelbrot(double x0, double y0);
+int		plot_mandelbrot(double x0, double y0, int type);
 int		plot_julia(double x0, double y0, double cx, double cy);
 int		plot_burningship(double x0, double y0);
 int		plot_tricorn(double x0, double y0);

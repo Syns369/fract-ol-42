@@ -6,13 +6,13 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:12:05 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 16:05:41 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:21:07 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-int	plot_mandelbrot(double x0, double y0)
+int	plot_mandelbrot(double x0, double y0, int type)
 {
 	double	x;
 	double	y;
@@ -25,7 +25,12 @@ int	plot_mandelbrot(double x0, double y0)
 	while (x * x + y * y <= 2 * 2 && iteration < MAX_ITERATION)
 	{
 		xtemp = x * x - y * y + x0;
-		y = 2 * x * y + y0;
+		if (type == 1) // mandelbrot
+			y = 2 * x * y + y0;
+		else if (type == 3) // burningship
+			y = fabs(2 * x * y) + y0;
+		else if (type == 4) // tricorn
+			y = -2 * x * y + y0;
 		x = xtemp;
 		iteration++;
 	}
