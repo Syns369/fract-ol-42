@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:12:05 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/06 03:55:20 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:57:13 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,26 @@ int	plot_burningship(double x0, double y0)
 	{
 		xtemp = x * x - y * y + x0;
 		y = fabs(2 * x * y) + y0;
+		x = xtemp;
+		iteration++;
+	}
+	return (iteration);
+}
+
+int	plot_tricorn(double x0, double y0)
+{
+	double	x;
+	double	y;
+	double	xtemp;
+	int		iteration;
+
+	x = 0.0;
+	y = 0.0;
+	iteration = 0;
+	while (x * x + y * y <= 2 * 2 && iteration < MAX_ITERATION)
+	{
+		xtemp = x * x - y * y + x0;
+		y = -2 * x * y + y0;
 		x = xtemp;
 		iteration++;
 	}

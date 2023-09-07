@@ -12,7 +12,7 @@ MLX_FILE    =libmlx.a
 
 MLX            =$(MLX_DIR)$(MLX_FILE)
 
-MLX_FLAGS    =-lX11 -lXext
+MLX_FLAGS    =-lX11 -lXext 
 
 SRC_DIR        =srcs/
 
@@ -23,7 +23,7 @@ INC_DIR        =includes/
 INCS         = $(LIBFT_DIR)includes/libft.h includes/ft_printf.h
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -Wall
+CFLAGS = -Wall -fsanitize=address
 RM = rm -rf
 AR = ar rc
 RANLIB = ranlib
@@ -33,6 +33,8 @@ SRC_FILES = main\
 			navigation\
 			pixels_manipulation\
 			animation\
+			utility\
+			parsing\
 
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))

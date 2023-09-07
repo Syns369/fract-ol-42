@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 23:53:43 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/06 04:06:09 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 11:19:16 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int	close_window(t_mlx_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_display(data->mlx);
 	free(data->mlx);
+	free(data->palette);
+	free(data);
 	exit(0);
 }
 
@@ -81,42 +84,9 @@ int	main(int argc, char **argv)
 	t_mlx_data	*data;
 
 	data = malloc(sizeof(t_mlx_data));
-	if (argc < 2)
-	{
-		printf("Usage: %s <fractal_type> [additional_parameters]\n", argv[0]);
-		printf("Available fractal types:\n");
-		printf("  m - mandelbrot\n");
-		printf("  j - julia\n");
-		printf("  b - burningship\n");
-		exit(EXIT_FAILURE);
-	}
-	if (strcmp(argv[1], "m") == 0)
-		data->fractal_name = "mandelbrot";
-	else if (strcmp(argv[1], "j") == 0)
-	{
-		data->fractal_name = "julia";
-		if (argc == 4)
-		{
-			data->julia_cx = atof(argv[2]);
-			data->julia_cy = atof(argv[3]);
-		}
-		else
-		{
-			data->julia_cx = -0.8;
-			data->julia_cy = 0.4;
-		}
-	}
-	else if (strcmp(argv[1], "b") == 0)
-		data->fractal_name = "burningship";
-	else
-	{
-		printf("Invalid fractal type: %s\n", argv[1]);
-		printf("Available fractal types:\n");
-		printf("  - mandelbrot\n");
-		printf("  - julia\n");
-		printf("  - burningship\n");
-		exit(EXIT_FAILURE);
-	}
+
+	parse(argc, argv, data);
+
 	init_fractol_data(data);
 	mlx_key_hook(data->win, handle_key, data);
 	mlx_mouse_hook(data->win, handle_mouse, data);

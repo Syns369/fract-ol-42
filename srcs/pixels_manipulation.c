@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:01:33 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/06 03:04:19 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/07 11:31:15 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	my_mlx_pixel_put(t_fractol_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	*palette_gen(int max_iteration)
+int	*palette_gen(int max_iteration)
 {
 	int		*palette;
 	int		i;
@@ -39,7 +39,7 @@ void	*palette_gen(int max_iteration)
 	return (palette);
 }
 
-void	color_pixel(t_mlx_data *data, t_fractol_data img, int px, int py)
+void	color_pixel(t_mlx_data *data, t_fractol_data *img, int px, int py)
 {
 	double	x0;
 	double	y0;
@@ -48,6 +48,7 @@ void	color_pixel(t_mlx_data *data, t_fractol_data img, int px, int py)
 
 	x0 = (double)px / WIDTH * (data->max_x - data->min_x) + data->min_x;
 	y0 = (double)py / HEIGHT * (data->max_y - data->min_y) + data->min_y;
+
 	palette = data->palette;
 	if (strcmp(data->fractal_name, "mandelbrot") == 0)
 		iteration = plot_mandelbrot(x0, y0);
@@ -55,17 +56,25 @@ void	color_pixel(t_mlx_data *data, t_fractol_data img, int px, int py)
 		iteration = plot_julia(x0, y0, data->julia_cx, data->julia_cy);
 	else if (strcmp(data->fractal_name, "burningship") == 0)
 		iteration = plot_burningship(x0, y0);
-	my_mlx_pixel_put(&img, px, py, palette[iteration]);
+	else if (strcmp(data->fractal_name, "tricorn") == 0)
+		iteration = plot_tricorn(x0, y0);
+
+	if (iteration < 0)
+		iteration = 0;
+	else if (iteration >= MAX_ITERATION)
+		iteration = MAX_ITERATION - 1;
+	my_mlx_pixel_put(img, px, py, palette[iteration]);
 }
 
 void	update_fractal_image(t_mlx_data *data)
 {
-	t_fractol_data	img;
+	t_fractol_data	*img;
 	int				px;
 	int				py;
 
-	img.img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	img = malloc(sizeof(t_fractol_data));
+	img->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
 	py = 0;
 	while (py < HEIGHT)
 	{
@@ -77,6 +86,7 @@ void	update_fractal_image(t_mlx_data *data)
 		}
 		py++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, img.img, 0, 0);
-	mlx_destroy_image(data->mlx, img.img);
+	mlx_put_image_to_window(data->mlx, data->win, img->img, 0, 0);
+	mlx_destroy_image(data->mlx, img->img);
+	free(img);
 }
