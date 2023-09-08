@@ -6,11 +6,11 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:01:33 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 12:17:26 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:32:56 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../fractol.h"
 
 void	my_mlx_pixel_put(t_fractol_data *data, int x, int y, int color)
 {
@@ -38,7 +38,7 @@ void	color_pixel(t_mlx_data *data, t_fractol_data *img, int px, int py)
 		if (data->use_power == 1)
 			iteration = plot_mandelbrot_p(x0, y0, data);
 		else
-			iteration = plot_mandelbrot(x0, y0, data);
+			iteration = plot_mandelbrot(x0, y0, data->fractal_type);
 	}
 	if (iteration >= MAX_ITERATION)
 		my_mlx_pixel_put(img, px, py, 0x000000);
@@ -54,7 +54,10 @@ void	update_fractal_image(t_mlx_data *data)
 
 	img = malloc(sizeof(t_fractol_data));
 	img->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
+	img->addr = mlx_get_data_addr(img->img,
+			&img->bits_per_pixel,
+			&img->line_length,
+			&img->endian);
 	py = 0;
 	while (py < HEIGHT)
 	{
@@ -69,9 +72,4 @@ void	update_fractal_image(t_mlx_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, img->img, 0, 0);
 	mlx_destroy_image(data->mlx, img->img);
 	free(img);
-	if (data->fractal_type == 2)
-	{
-		ft_printf("julia_cx: %f\n", data->julia_cx);
-		ft_printf("julia_cy: %f\n", data->julia_cy);
-	}
 }

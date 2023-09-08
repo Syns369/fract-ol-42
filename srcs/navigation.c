@@ -6,11 +6,11 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:24:50 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 13:26:41 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:33:09 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../fractol.h"
 
 void	move_x(t_mlx_data *data, float amount)
 {

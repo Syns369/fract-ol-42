@@ -6,11 +6,11 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 23:53:43 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 13:05:14 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:32:37 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../fractol.h"
 
 int	close_window(t_mlx_data *data)
 {
@@ -26,21 +26,20 @@ int	close_window(t_mlx_data *data)
 
 int	init_fractol_data(t_mlx_data *data)
 {
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Window");
 	center(data);
 	data->palette1 = palette_gen(9, 15, 8.5);
-	data->palette2 = palette_gen(10, 8.43, 5.42);
+	data->palette2 = palette_gen(10 * 5, 8.43 * 5, 5.42 * 5);
 	data->palette3 = palette_gen(38.62, 84.15, 11.77);
 	data->current_palette = data->palette1;
 	data->power = 2.0;
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Window");
 	update_fractal_image(data);
 	return (0);
 }
 
 int	handle_key(int key, t_mlx_data *data)
 {
-	ft_printf("key: %d\n", key);
 	if (key == 65307)
 		close_window(data);
 	else if (key == 65361)

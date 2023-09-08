@@ -6,21 +6,21 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:13:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 13:05:35 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:34:26 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include "../libft_42/libft.h"
-# include "../minilibx-linux/mlx.h"
+# include "libft_42/libft.h"
+# include "minilibx-linux/mlx.h"
 # include <stdio.h>
 # include <math.h>
 
 # define WIDTH 512
 # define HEIGHT 512
-# define MAX_ITERATION 10
+# define MAX_ITERATION 100
 # define ZOOM_FACTOR 0.1
 # define MOVE_FACTOR 0.05
 # define STEP_FACTOR 0.01
@@ -91,7 +91,7 @@ void	mandel_parse(int argc, char **argv, t_mlx_data *data);
 void	julia_parse(int argc, char **argv, t_mlx_data *data);
 void	error_message(char **argv, t_mlx_data *data);
 
-int		plot_mandelbrot(double x0, double y0, t_mlx_data *data);
+int		plot_mandelbrot(double x0, double y0, int type);
 int		plot_mandelbrot_p(double x0, double y0, t_mlx_data *data);
 int		plot_julia(double x0, double y0, double cx, double cy);
 

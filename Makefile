@@ -1,29 +1,29 @@
-NAME        =fractol
+NAME = fractol
 
-LIBFT_DIR    =libft_42/
+LIBFT_DIR = libft_42/
 
-LIBFT_FILE    =libft.a
+LIBFT_FILE = libft.a
 
-LIBFT        =$(LIBFT_DIR)$(LIBFT_FILE)
+LIBFT = $(LIBFT_DIR)$(LIBFT_FILE)
 
-MLX_DIR        =minilibx-linux/
+MLX_DIR = minilibx-linux/
 
-MLX_FILE    =libmlx.a
+MLX_FILE=  libmlx.a
 
-MLX            =$(MLX_DIR)$(MLX_FILE)
+MLX = $(MLX_DIR)$(MLX_FILE)
 
-MLX_FLAGS    =-lX11 -lXext 
+MLX_FLAGS = -lX11 -lXext
 
-SRC_DIR        =srcs/
+SRC_DIR = srcs/
 
-OBJ_DIR        =objs/
+OBJ_DIR = objs/
 
-INC_DIR        =includes/
+INC_DIR = includes/
 
-INCS         = $(LIBFT_DIR)includes/libft.h includes/ft_printf.h
 CC = gcc
-# CFLAGS = -Wall -Wextra -Werror
+
 CFLAGS = -Wall -Werror -Wextra -flto -O2
+
 RM = rm -rf
 AR = ar rc
 RANLIB = ranlib
@@ -50,16 +50,17 @@ mlx:
 	make all -C $(MLX_DIR)
 
 $(NAME):    lib_ft mlx $(OBJS)
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX) $(MLX_FLAGS) -lm -lpthread -g3 
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX) $(MLX_FLAGS) -lm
 
 $(OBJ_DIR)%.o:        $(SRC_DIR)%.c | $(OBJ_DIR)
-					$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+					$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 			mkdir -p $(OBJ_DIR)
 
 clean:
 	make clean -C $(LIBFT_DIR)
+	make clean -C $(MLX_DIR)
 	$(RM) $(OBJ_DIR)
 
 fclean: clean

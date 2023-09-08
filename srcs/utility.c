@@ -6,11 +6,11 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:57:14 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 16:25:51 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:32:58 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../fractol.h"
 
 double	ft_atof(const char *str)
 {

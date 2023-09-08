@@ -6,11 +6,11 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:18:53 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 12:38:57 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:33:05 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../fractol.h"
 
 void	error_message(char **argv, t_mlx_data *data)
 {
@@ -30,12 +30,11 @@ void	error_message(char **argv, t_mlx_data *data)
 
 void	julia_parse(int argc, char **argv, t_mlx_data *data)
 {
+	data->fractal_type = 2;
 	if (argc == 4)
 	{
 		if (ft_isfloat(argv[2]) && ft_isfloat(argv[3]))
 		{
-			ft_printf("julia_cx: %f\n", ft_atof(argv[2]));
-			ft_printf("julia_cy: %f\n", ft_atof(argv[3]));
 			data->julia_cx = ft_atof(argv[2]);
 			data->julia_cy = ft_atof(argv[3]);
 		}
@@ -77,10 +76,7 @@ void	parse(int argc, char **argv, t_mlx_data *data)
 	if (argc < 2)
 		error_message(argv, data);
 	if (ft_strcmp(argv[1], "j") == 0)
-	{
-		data->fractal_type = 2;
 		julia_parse(argc, argv, data);
-	}
 	else
 		mandel_parse(argc, argv, data);
 }

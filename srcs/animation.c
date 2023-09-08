@@ -6,11 +6,11 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 03:30:20 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 13:40:21 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:31:53 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../fractol.h"
 
 void	step(t_mlx_data *data, int direction)
 {

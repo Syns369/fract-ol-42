@@ -6,11 +6,11 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 16:38:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/07 18:31:23 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:33:18 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../fractol.h"
 
 int	*palette_gen(double red, double green, double blue)
 {
