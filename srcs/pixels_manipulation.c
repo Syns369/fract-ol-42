@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:01:33 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 17:32:56 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:38:45 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ void	color_pixel(t_mlx_data *data, t_fractol_data *img, int px, int py)
 	y0 = (double)py / HEIGHT * (data->max_y - data->min_y) + data->min_y;
 	palette = data->current_palette;
 	if (data->fractal_type == 2)
-		iteration = plot_julia(x0, y0, data->julia_cx, data->julia_cy);
+		iteration = plot_julia(x0, y0, data);
 	else
 	{
 		if (data->use_power == 1)
 			iteration = plot_mandelbrot_p(x0, y0, data);
 		else
-			iteration = plot_mandelbrot(x0, y0, data->fractal_type);
+			iteration = plot_mandelbrot(x0, y0, data);
 	}
-	if (iteration >= MAX_ITERATION)
+	if (iteration >= data->max_iteration)
 		my_mlx_pixel_put(img, px, py, 0x000000);
 	else
 		my_mlx_pixel_put(img, px, py, palette[iteration]);

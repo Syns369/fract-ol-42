@@ -6,13 +6,13 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:12:05 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 17:33:14 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:37:46 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-int	plot_mandelbrot(double x0, double y0, int type)
+int	plot_mandelbrot(double x0, double y0, t_mlx_data *data)
 {
 	double	x;
 	double	y;
@@ -22,14 +22,14 @@ int	plot_mandelbrot(double x0, double y0, int type)
 	x = 0.0;
 	y = 0.0;
 	iteration = 0;
-	while (x * x + y * y <= 2 * 2 && iteration < MAX_ITERATION)
+	while (x * x + y * y <= 2 * 2 && iteration < data->max_iteration)
 	{
 		xtemp = x * x - y * y + x0;
-		if (type == 1)
+		if (data->fractal_type == 1)
 			y = 2 * x * y + y0;
-		else if (type == 3)
+		else if (data->fractal_type == 3)
 			y = fabs(2 * x * y) + y0;
-		else if (type == 4)
+		else if (data->fractal_type == 4)
 			y = -2 * x * y + y0;
 		x = xtemp;
 		iteration++;
@@ -48,7 +48,7 @@ int	plot_mandelbrot_p(double x0, double y0, t_mlx_data *data)
 	x = 0.0;
 	y = 0.0;
 	iteration = 0;
-	while (x * x + y * y <= 2 * 2 && iteration < MAX_ITERATION)
+	while (x * x + y * y <= 2 * 2 && iteration < data->max_iteration)
 	{
 		power = pow((x * x + y * y), (data->power / 2));
 		xtemp = power * cos(data->power * atan2(y, x)) + x0;
@@ -64,16 +64,16 @@ int	plot_mandelbrot_p(double x0, double y0, t_mlx_data *data)
 	return (iteration);
 }
 
-int	plot_julia(double x0, double y0, double cx, double cy)
+int	plot_julia(double x0, double y0, t_mlx_data *data)
 {
 	double	xtemp;
 	int		iteration;
 
 	iteration = 0;
-	while (x0 * x0 + y0 * y0 <= 2 * 2 && iteration < MAX_ITERATION)
+	while (x0 * x0 + y0 * y0 <= 2 * 2 && iteration < data->max_iteration)
 	{
-		xtemp = x0 * x0 - y0 * y0 + cx;
-		y0 = 2 * x0 * y0 + cy;
+		xtemp = x0 * x0 - y0 * y0 + data->julia_cx;
+		y0 = 2 * x0 * y0 + data->julia_cy;
 		x0 = xtemp;
 		iteration++;
 	}

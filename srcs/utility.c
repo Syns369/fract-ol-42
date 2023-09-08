@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:57:14 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 17:32:58 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 19:10:47 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,13 @@ int	ft_isfloat(const char *str)
 		if (str[i++] == '.')
 			dot_count++;
 	return (dot_count <= 1 && i == (int)ft_strlen(str));
+}
+
+void	change_iteration(t_mlx_data *data, int direction)
+{
+	data->max_iteration += 10 * direction;
+	free(data->palette1);
+	free(data->palette2);
+	free(data->palette3);
+	init_palette(data);
 }

@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 23:53:43 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 17:32:37 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 19:08:36 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ int	close_window(t_mlx_data *data)
 
 int	init_fractol_data(t_mlx_data *data)
 {
+	data->max_iteration = MAX_ITERATION;
 	center(data);
-	data->palette1 = palette_gen(9, 15, 8.5);
-	data->palette2 = palette_gen(10 * 5, 8.43 * 5, 5.42 * 5);
-	data->palette3 = palette_gen(38.62, 84.15, 11.77);
-	data->current_palette = data->palette1;
+	init_palette(data);
+	// data->current_palette = data->palette1;
 	data->power = 2.0;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Window");
@@ -54,6 +53,10 @@ int	handle_key(int key, t_mlx_data *data)
 		center(data);
 	else if (key == 65437)
 		change_palette(data);
+	else if (key == 65453)
+		change_iteration(data, -1);
+	else if (key == 65451)
+		change_iteration(data, 1);
 	else
 		animate_all(data, key);
 	update_fractal_image(data);

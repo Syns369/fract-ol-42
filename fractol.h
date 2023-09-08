@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:13:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 17:34:26 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:46:25 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_mlx_data {
 	double	julia_cx;
 	double	julia_cy;
 
+	int		max_iteration;
+
 	double	power;
 	int		use_power;
 
@@ -61,11 +63,13 @@ typedef struct s_mlx_data {
 
 int		main(int argc, char **argv);
 int		init_fractol_data(t_mlx_data *data);
+void	init_palette(t_mlx_data *data);
 
 void	move_x(t_mlx_data *data, float amount);
 void	move_y(t_mlx_data *data, float amount);
 void	zoom(t_mlx_data *data, double x, double y, double zoom_factor);
 void	center(t_mlx_data *data);
+void	change_iteration(t_mlx_data *data, int direction);
 
 int		handle_key(int key, t_mlx_data *data);
 int		handle_mouse(int button, int x, int y, t_mlx_data *data);
@@ -83,16 +87,16 @@ void	my_mlx_pixel_put(t_fractol_data *data, int x, int y, int color);
 double	ft_atof(const char *str);
 int		ft_isfloat(const char *str);
 
-int		*palette_gen(double red, double green, double blue);
+int		*palette_gen(double red, double green, double blue, int max_iteration);
 void	change_palette(t_mlx_data *data);
 
 void	parse(int argc, char **argv, t_mlx_data *data);
 void	mandel_parse(int argc, char **argv, t_mlx_data *data);
 void	julia_parse(int argc, char **argv, t_mlx_data *data);
-void	error_message(char **argv, t_mlx_data *data);
+void	error_message(t_mlx_data *data);
 
-int		plot_mandelbrot(double x0, double y0, int type);
+int		plot_mandelbrot(double x0, double y0, t_mlx_data *data);
 int		plot_mandelbrot_p(double x0, double y0, t_mlx_data *data);
-int		plot_julia(double x0, double y0, double cx, double cy);
+int		plot_julia(double x0, double y0, t_mlx_data *data);
 
 #endif
