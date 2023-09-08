@@ -35,7 +35,6 @@ SRC_FILES = main\
 			animation\
 			utility\
 			parsing\
-			fractals_bonus\
 			colors\
 			
 
