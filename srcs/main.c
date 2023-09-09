@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 23:53:43 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 19:08:36 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:47:57 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	init_fractol_data(t_mlx_data *data)
 	data->max_iteration = MAX_ITERATION;
 	center(data);
 	init_palette(data);
-	// data->current_palette = data->palette1;
+	data->current_palette = &data->palette1;
 	data->power = 2.0;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Window");

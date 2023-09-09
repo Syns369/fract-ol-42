@@ -43,17 +43,17 @@ OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
 all: $(NAME)
 
-lib_ft:
-	make all -C $(LIBFT_DIR)
+$(LIBFT):
+	@make all -C $(LIBFT_DIR)
 
-mlx:
-	make all -C $(MLX_DIR)
+$(MLX):
+	@make all -C $(MLX_DIR)
 
-$(NAME):    lib_ft mlx $(OBJS)
+$(NAME):	$(OBJS) $(LIBFT) $(MLX)
 			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX) $(MLX_FLAGS) -lm
 
-$(OBJ_DIR)%.o:        $(SRC_DIR)%.c | $(OBJ_DIR)
-					$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)%.o:	$(SRC_DIR)%.c fractol.h | $(OBJ_DIR)
+				$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 			mkdir -p $(OBJ_DIR)

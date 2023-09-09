@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:18:53 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 18:24:18 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/09 17:29:30 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void	print_controls(void)
 	ft_printf("F\t\t\tReset view.\n");
 	ft_printf("5 (numpad)\t\tChange color schemes.\n");
 	ft_printf("4, 8, 6, 2 (numpad)\tAnimate Julia\n");
-	ft_printf("S/D\t\t\tStep anim Julia.\n");
-	ft_printf("P/O\t\t\tChange power (not for julia).\n");
+	ft_printf("S / D\t\t\tStep anim Julia.\n");
+	ft_printf("P / O\t\t\tChange power (not for julia).\n");
+	ft_printf("+ / -\t\t\tChange max iteration.\n");
 	ft_printf("ESC or close window\tQuit fract'ol.\n");
 	ft_printf("+====================================================+\n");
 }

@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:01:33 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 18:38:45 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:45:06 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	color_pixel(t_mlx_data *data, t_fractol_data *img, int px, int py)
 	iteration = 0;
 	x0 = (double)px / WIDTH * (data->max_x - data->min_x) + data->min_x;
 	y0 = (double)py / HEIGHT * (data->max_y - data->min_y) + data->min_y;
-	palette = data->current_palette;
+	palette = *data->current_palette;
 	if (data->fractal_type == 2)
 		iteration = plot_julia(x0, y0, data);
 	else

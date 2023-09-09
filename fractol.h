@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:13:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 18:46:25 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/09 18:57:22 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_mlx_data {
 	double	min_y;
 	double	max_y;
 
-	int		*current_palette;
+	int		**current_palette;
 	int		*palette1;
 	int		*palette2;
 	int		*palette3;
@@ -58,7 +58,6 @@ typedef struct s_mlx_data {
 
 	double	power;
 	int		use_power;
-
 }	t_mlx_data;
 
 int		main(int argc, char **argv);

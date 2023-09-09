@@ -6,7 +6,7 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 16:38:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/08 19:08:29 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:52:38 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	*palette_gen(double red, double green, double blue, int max_iteration)
 
 void	change_palette(t_mlx_data *data)
 {
-	if (data->current_palette == data->palette1)
-		data->current_palette = data->palette2;
-	else if (data->current_palette == data->palette2)
-		data->current_palette = data->palette3;
-	else if (data->current_palette == data->palette3)
-		data->current_palette = data->palette1;
+	if (*data->current_palette == data->palette1)
+		data->current_palette = &data->palette2;
+	else if (*data->current_palette == data->palette2)
+		data->current_palette = &data->palette3;
+	else if (*data->current_palette == data->palette3)
+		data->current_palette = &data->palette1;
 }
 
 void	init_palette(t_mlx_data *data)
@@ -49,5 +49,4 @@ void	init_palette(t_mlx_data *data)
 	data->palette1 = palette_gen(9, 15, 8.5, max_iteration);
 	data->palette2 = palette_gen(10 * 5, 8.43 * 5, 5.42 * 5, max_iteration);
 	data->palette3 = palette_gen(38.62, 84.15, 11.77, max_iteration);
-	data->current_palette = data->palette1;
 }
