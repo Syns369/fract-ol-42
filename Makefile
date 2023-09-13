@@ -22,7 +22,7 @@ INC_DIR = includes/
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -flto -O2
+CFLAGS = -Wall -Werror -Wextra
 
 RM = rm -rf
 AR = ar rc
