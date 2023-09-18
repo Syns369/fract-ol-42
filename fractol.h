@@ -6,14 +6,14 @@
 /*   By: jdarcour <jdarcour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 22:13:55 by jdarcour          #+#    #+#             */
-/*   Updated: 2023/09/09 19:30:37 by jdarcour         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:46:54 by jdarcour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include "libft_42/libft.h"
+# include "libft-42/libft.h"
 # include "minilibx-linux/mlx.h"
 # include <stdio.h>
 # include <math.h>

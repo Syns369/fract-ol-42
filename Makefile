@@ -1,6 +1,6 @@
 NAME = fractol
 
-LIBFT_DIR = libft_42/
+LIBFT_DIR = libft-42/
 
 LIBFT_FILE = libft.a
 
